@@ -32,18 +32,24 @@ export default function LoginPage() {
     const password = formData.get("password") as string
 
     try {
-      // Use our MongoDB API
+      // Add timeout to handle potential long requests
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password, role }),
+        signal: controller.signal
       })
+
+      clearTimeout(timeoutId)
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}))
-        throw new Error(data.error || "Login failed")
+        throw new Error(data.error || "Login failed. Please try again later.")
       }
 
       const data = await response.json()
@@ -63,7 +69,11 @@ export default function LoginPage() {
         router.push("/recruiter/dashboard")
       }
     } catch (err: any) {
-      setError(err.message || "Invalid email or password. Please try again.")
+      if (err.name === 'AbortError') {
+        setError("Login request timed out. Please try again.")
+      } else {
+        setError(err.message || "Invalid email or password. Please try again.")
+      }
     } finally {
       setIsLoading(false)
     }

@@ -42,18 +42,24 @@ export default function SignupPage() {
     }
 
     try {
-      // Use our MongoDB API
+      // Add timeout to handle potential long requests
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email, password, role, company }),
+        signal: controller.signal
       })
+
+      clearTimeout(timeoutId)
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}))
-        throw new Error(data.error || "Registration failed")
+        throw new Error(data.error || "Registration failed. Please try again later.")
       }
 
       const data = await response.json()
@@ -66,7 +72,11 @@ export default function SignupPage() {
       // Redirect to login page
       router.push(`/auth/login?role=${role}`)
     } catch (err: any) {
-      setError(err.message || "Registration failed. Please try again.")
+      if (err.name === 'AbortError') {
+        setError("Request timed out. Please try again.")
+      } else {
+        setError(err.message || "Registration failed. Please check your connection and try again.")
+      }
     } finally {
       setIsLoading(false)
     }

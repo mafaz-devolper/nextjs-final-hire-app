@@ -41,11 +41,12 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password, role }),
       })
 
-      const data = await response.json()
-
       if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
         throw new Error(data.error || "Login failed")
       }
+
+      const data = await response.json()
 
       // Store auth data in localStorage
       localStorage.setItem("authUser", JSON.stringify(data.user))

@@ -51,11 +51,12 @@ export default function SignupPage() {
         body: JSON.stringify({ name, email, password, role, company }),
       })
 
-      const data = await response.json()
-
       if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
         throw new Error(data.error || "Registration failed")
       }
+
+      const data = await response.json()
 
       toast({
         title: "Account created successfully",

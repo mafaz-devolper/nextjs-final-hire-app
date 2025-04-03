@@ -111,46 +111,12 @@ export default function CandidateDashboard() {
           <p className="text-muted-foreground">Manage your job applications, saved jobs, and profile</p>
         </div>
 
-        {/* Profile Completion Card */}
-        <Card className="w-full">
-          <CardHeader className="pb-3">
-            <CardTitle>Complete Your Profile</CardTitle>
-            <CardDescription>A complete profile increases your chances of getting hired</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Profile Completion</span>
-                <span className="text-sm font-medium">{profileCompletion}%</span>
-              </div>
-              <Progress value={profileCompletion} className="h-2" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                <Button variant="outline" className="w-full flex items-center justify-center gap-2" asChild>
-                  <Link href="/candidate/profile">
-                    <FileText className="h-4 w-4" /> Update Resume
-                  </Link>
-                </Button>
-                <Button variant="outline" className="w-full flex items-center justify-center gap-2" asChild>
-                  <Link href="/candidate/profile">
-                    <Plus className="h-4 w-4" /> Add Skills
-                  </Link>
-                </Button>
-                <Button variant="outline" className="w-full flex items-center justify-center gap-2" asChild>
-                  <Link href="/candidate/profile">
-                    <Plus className="h-4 w-4" /> Add Experience
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Dashboard Tabs */}
         <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="saved">Saved Jobs</TabsTrigger>
-            <TabsTrigger value="recommended">Recommended</TabsTrigger>
           </TabsList>
 
           {/* Applications Tab */}

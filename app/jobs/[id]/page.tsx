@@ -91,6 +91,223 @@ const jobs = [
     employees: "50-100",
     website: "https://techcorp.example.com",
   },
+  {
+    id: 2,
+    title: "Backend Engineer",
+    company: "DataSystems",
+    companyLogo: "/placeholder.svg?height=80&width=80",
+    location: "Remote",
+    type: "Full-time",
+    salary: "$110,000 - $140,000",
+    experience: "3+ years",
+    education: "Bachelor’s degree in Computer Science or related field",
+    posted: "1 week ago",
+    deadline: "25 days remaining",
+    description: `
+      <p>DataSystems is hiring a skilled Backend Engineer to develop and maintain our scalable backend systems.</p>
+      
+      <h3>Responsibilities:</h3>
+      <ul>
+        <li>Develop and maintain APIs and microservices</li>
+        <li>Ensure performance and reliability of backend systems</li>
+        <li>Collaborate with frontend engineers to integrate UI components</li>
+        <li>Write well-documented, clean, and efficient code</li>
+      </ul>
+      
+      <h3>Requirements:</h3>
+      <ul>
+        <li>3+ years of experience in backend development</li>
+        <li>Proficiency in Node.js, Python, or Java</li>
+        <li>Experience with cloud platforms like AWS or Google Cloud</li>
+        <li>Strong understanding of database systems (SQL & NoSQL)</li>
+      </ul>
+      
+      <h3>Benefits:</h3>
+      <ul>
+        <li>Competitive salary</li>
+        <li>Remote work flexibility</li>
+        <li>Health insurance</li>
+      </ul>
+    `,
+    tags: ["Node.js", "Python", "AWS", "SQL"],
+    companyDescription: "DataSystems specializes in data analytics and cloud computing solutions.",
+    employees: "200-500",
+    website: "https://datasystems.example.com",
+  },
+  {
+    id: 3,
+    title: "UX/UI Designer",
+    company: "CreativeStudio",
+    companyLogo: "/placeholder.svg?height=80&width=80",
+    location: "New York, NY",
+    type: "Contract",
+    salary: "$90,000 - $120,000",
+    experience: "2+ years",
+    education: "Bachelor’s degree in Design, HCI, or related field",
+    posted: "3 days ago",
+    deadline: "28 days remaining",
+    description: `
+      <p>CreativeStudio is looking for a UX/UI Designer to craft stunning and intuitive digital experiences.</p>
+      
+      <h3>Responsibilities:</h3>
+      <ul>
+        <li>Design user-friendly interfaces and prototypes</li>
+        <li>Work closely with developers and product managers</li>
+        <li>Conduct user research and usability testing</li>
+      </ul>
+      
+      <h3>Requirements:</h3>
+      <ul>
+        <li>Experience in Figma and Adobe XD</li>
+        <li>Strong understanding of UX principles</li>
+        <li>Portfolio showcasing previous design work</li>
+      </ul>
+      
+      <h3>Benefits:</h3>
+      <ul>
+        <li>Flexible work environment</li>
+        <li>Remote work available</li>
+      </ul>
+    `,
+    tags: ["Figma", "Adobe XD", "UI/UX", "Wireframing"],
+    companyDescription: "CreativeStudio is a design agency specializing in UI/UX and branding.",
+    employees: "10-50",
+    website: "https://creativestudio.example.com",
+  },
+  {
+    id: 4,
+    title: "DevOps Engineer",
+    company: "CloudTech",
+    companyLogo: "/placeholder.svg?height=80&width=80",
+    location: "Remote",
+    type: "Full-time",
+    salary: "$130,000 - $160,000",
+    experience: "4+ years",
+    education: "Bachelor’s degree in IT or related field",
+    posted: "Just now",
+    deadline: "29 days remaining",
+    description: `
+      <p>CloudTech is hiring a DevOps Engineer to maintain and optimize our cloud infrastructure.</p>
+      
+      <h3>Responsibilities:</h3>
+      <ul>
+        <li>Manage CI/CD pipelines</li>
+        <li>Monitor cloud infrastructure</li>
+        <li>Implement security best practices</li>
+      </ul>
+      
+      <h3>Requirements:</h3>
+      <ul>
+        <li>Proficiency in AWS and Kubernetes</li>
+        <li>Experience with Docker and Terraform</li>
+      </ul>
+      
+      <h3>Benefits:</h3>
+      <ul>
+        <li>Remote work flexibility</li>
+        <li>Health and wellness benefits</li>
+      </ul>
+    `,
+    tags: ["Docker", "Kubernetes", "AWS", "Terraform"],
+    companyDescription: "CloudTech is a cloud infrastructure company providing scalable solutions.",
+    employees: "500-1000",
+    website: "https://cloudtech.example.com",
+  },
+  {
+    id: 5,
+    title: "Product Manager",
+    company: "InnovateCo",
+    companyLogo: "/placeholder.svg?height=80&width=80",
+    location: "Austin, TX",
+    type: "Full-time",
+    salary: "$115,000 - $145,000",
+    experience: "5+ years",
+    education: "MBA or relevant experience",
+    posted: "5 days ago",
+    deadline: "27 days remaining",
+    description: `
+      <p>InnovateCo is seeking a Product Manager to drive the development of our innovative digital solutions.</p>
+      
+      <h3>Responsibilities:</h3>
+      <ul>
+        <li>Define product vision and roadmap</li>
+        <li>Work with cross-functional teams</li>
+        <li>Gather user feedback and implement improvements</li>
+      </ul>
+      
+      <h3>Requirements:</h3>
+      <ul>
+        <li>Experience with Agile and Scrum</li>
+        <li>Strong leadership skills</li>
+      </ul>
+      
+      <h3>Benefits:</h3>
+      <ul>
+        <li>Equity options</li>
+        <li>Professional development budget</li>
+      </ul>
+    `,
+    tags: ["Product Management", "Agile", "Scrum"],
+    companyDescription: "InnovateCo develops cutting-edge digital products for businesses.",
+    employees: "100-200",
+    website: "https://innovateco.example.com",
+  },
+  {
+    id: 6,
+    title: "Junior Web Developer",
+    company: "StartupHub",
+    companyLogo: "/placeholder.svg?height=80&width=80",
+    location: "Chicago, IL",
+    type: "Full-time",
+    salary: "$70,000 - $90,000",
+    experience: "1+ years",
+    education: "Bachelor’s degree in Computer Science or relevant experience",
+    posted: "1 day ago",
+    deadline: "30 days remaining",
+    description: `
+      <p>StartupHub is hiring a Junior Web Developer to help build modern web applications.</p>
+      
+      <h3>Responsibilities:</h3>
+      <ul>
+        <li>Work on frontend and backend features</li>
+        <li>Fix bugs and optimize performance</li>
+      </ul>
+      
+      <h3>Requirements:</h3>
+      <ul>
+        <li>Basic knowledge of JavaScript, HTML, and CSS</li>
+      </ul>
+      
+      <h3>Benefits:</h3>
+      <ul>
+        <li>Growth opportunities</li>
+      </ul>
+    `,
+    tags: ["JavaScript", "HTML", "CSS", "React"],
+    companyDescription: "StartupHub helps startups build and scale their web applications.",
+    employees: "20-50",
+    website: "https://startuphub.example.com",
+  },
+  {
+    id: 7,
+    title: "Data Scientist",
+    company: "AnalyticsPro",
+    companyLogo: "/placeholder.svg?height=80&width=80",
+    location: "Remote",
+    type: "Contract",
+    salary: "$100,000 - $130,000",
+    experience: "3+ years",
+    education: "Master’s degree in Data Science or related field",
+    posted: "4 days ago",
+    deadline: "26 days remaining",
+    description: `
+      <p>AnalyticsPro is looking for a Data Scientist to analyze data and build predictive models.</p>
+    `,
+    tags: ["Python", "Machine Learning", "SQL"],
+    companyDescription: "AnalyticsPro provides AI-driven data solutions.",
+    employees: "50-200",
+    website: "https://analyticspro.example.com",
+  },
   // Add more job data as needed
 ]
 
@@ -98,7 +315,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const jobId = Number.parseInt(params.id)
-  const [job, setJob] = useState(jobs[0]) // Initialize with a default job
+  const [job, setJob] = useState<typeof jobs[0] | null>(null) // Initialize with a default job
   const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
   const [hasApplied, setHasApplied] = useState(false)
@@ -129,7 +346,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
 
     if (isSaved) {
       // Remove job from saved jobs
-      const updatedSavedJobs = savedJobs.filter((savedJob: any) => savedJob.id !== jobId)
+      const updatedSavedJobs = savedJobs.filter((savedJob: { id: number }) => savedJob.id !== jobId)
       localStorage.setItem("savedJobs", JSON.stringify(updatedSavedJobs))
       setIsSaved(false)
       toast({
@@ -139,13 +356,13 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
     } else {
       // Add job to saved jobs
       const jobToSave = {
-        id: job.id,
-        title: job.title,
-        company: job.company,
-        location: job.location,
-        salary: job.salary,
-        postedDate: job.posted,
-        type: job.type,
+        id: job?.id,
+        title: job?.title,
+        company: job?.company,
+        location: job?.location,
+        salary: job?.salary,
+        postedDate: job?.posted,
+        type: job?.type,
       }
       savedJobs.push(jobToSave)
       localStorage.setItem("savedJobs", JSON.stringify(savedJobs))
@@ -225,10 +442,10 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
               Jobs
             </Link>
             <span>/</span>
-            <span>{job.title}</span>
+            <span>{job?.title}</span>
           </div>
 
-          <Card className="overflow-hidden">
+          {job && (<Card className="overflow-hidden">
             <CardHeader className="space-y-6">
               <div className="flex flex-col md:flex-row gap-6 md:items-start md:justify-between">
                 <div className="flex gap-6 items-start">
@@ -257,16 +474,16 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                       Apply Now
                     </Button>
                   )}
-                  <Button 
-                    variant={isSaved ? "default" : "outline"} 
+                  <Button
+                    variant={isSaved ? "default" : "outline"}
                     onClick={handleSaveJob}
                     className="w-full sm:w-auto"
                   >
                     <Heart className={`h-4 w-4 mr-2 ${isSaved ? "fill-current" : ""}`} />
                     {isSaved ? "Saved" : "Save Job"}
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     onClick={handleShareJob}
                     className="w-full sm:w-auto"
                   >
@@ -334,12 +551,12 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                 </Button>
               )}
             </CardFooter>
-          </Card>
+          </Card>)}
         </div>
 
         {/* Sidebar */}
         <div className="space-y-8">
-          <Card>
+          {job && (<Card>
             <CardHeader>
               <CardTitle>About the Company</CardTitle>
             </CardHeader>
@@ -378,7 +595,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card>)}
 
           <Card>
             <CardHeader>
@@ -412,7 +629,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
       </div>
 
       {/* Job Application Modal */}
-      <JobApplicationModal
+      {job && (<JobApplicationModal
         jobId={job.id}
         jobTitle={job.title}
         company={job.company}
@@ -425,7 +642,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
           }
         }}
         onSuccess={handleApplicationSuccess}
-      />
+      />)}
 
       {/* Share Job Modal */}
       <Dialog open={isShareModalOpen} onOpenChange={setIsShareModalOpen}>

@@ -11,7 +11,7 @@ export default function AboutPage() {
         <div className="text-center space-y-6">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">About JobPortal</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-            Connecting talented professionals with top employers worldwide since 2015.
+            Connecting talented professionals with top employers worldwide since 2025.
           </p>
         </div>
 

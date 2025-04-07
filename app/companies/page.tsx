@@ -40,7 +40,7 @@ const sampleCompanies = [
 ];
 
 export default function CompaniesPage() {
-  const { getCompanies, isLoading, error } = useMongoDB()
+  const { getCompanies, isLoading, error } = useMongoDB();
   const [companies, setCompanies] = useState(sampleCompanies)
   const [searchTerm, setSearchTerm] = useState("")
   const [industryFilter, setIndustryFilter] = useState("All")

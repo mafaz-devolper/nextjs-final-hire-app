@@ -65,6 +65,8 @@ export function Navbar() {
     if (userRole === "candidate") {
       return [
         { name: "Dashboard", href: "/candidate/dashboard" },
+        { name: "My Profile", href: "/candidate/profile/view" },
+        { name: "Edit Profile", href: "/candidate/profile" },
         { name: "Resume Templates", href: "/candidate/resume-templates" },
       ]
     } else if (userRole === "recruiter") {

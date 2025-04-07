@@ -89,9 +89,9 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <Tabs defaultValue={defaultTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 gap-4 p-1">
-            <TabsTrigger value="candidate" className="text-base py-2">Candidate</TabsTrigger>
-            <TabsTrigger value="recruiter" className="text-base py-2">Recruiter</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsTrigger value="candidate" className="text-base py-2 data-[state=active]:bg-blue-800 data-[state=active]:text-white">Candidate</TabsTrigger>
+            <TabsTrigger value="recruiter" className="text-base py-2 data-[state=active]:bg-blue-800 data-[state=active]:text-white">Recruiter</TabsTrigger>
           </TabsList>
           <TabsContent value="candidate">
             <form onSubmit={(e) => handleSubmit(e, "candidate")}>
@@ -104,13 +104,13 @@ export default function LoginPage() {
                 )}
                 <div className="space-y-2">
                   <Label htmlFor="candidate-email" className="text-sm font-medium">Email</Label>
-                  <Input 
-                    id="candidate-email" 
-                    name="email" 
-                    type="email" 
-                    placeholder="name@example.com" 
+                  <Input
+                    id="candidate-email"
+                    name="email"
+                    type="email"
+                    placeholder="name@example.com"
                     className="h-10"
-                    required 
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -120,12 +120,12 @@ export default function LoginPage() {
                       Forgot password?
                     </Link>
                   </div>
-                  <Input 
-                    id="candidate-password" 
-                    name="password" 
+                  <Input
+                    id="candidate-password"
+                    name="password"
                     type="password"
-                    className="h-10" 
-                    required 
+                    className="h-10"
+                    required
                   />
                 </div>
               </CardContent>
@@ -153,13 +153,13 @@ export default function LoginPage() {
                 )}
                 <div className="space-y-2">
                   <Label htmlFor="recruiter-email" className="text-sm font-medium">Email</Label>
-                  <Input 
-                    id="recruiter-email" 
-                    name="email" 
-                    type="email" 
+                  <Input
+                    id="recruiter-email"
+                    name="email"
+                    type="email"
                     placeholder="name@company.com"
-                    className="h-10" 
-                    required 
+                    className="h-10"
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -169,12 +169,12 @@ export default function LoginPage() {
                       Forgot password?
                     </Link>
                   </div>
-                  <Input 
-                    id="recruiter-password" 
-                    name="password" 
+                  <Input
+                    id="recruiter-password"
+                    name="password"
                     type="password"
-                    className="h-10" 
-                    required 
+                    className="h-10"
+                    required
                   />
                 </div>
               </CardContent>

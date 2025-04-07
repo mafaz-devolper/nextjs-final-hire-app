@@ -17,6 +17,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Textarea } from "@/components/ui/textarea" 
+import { Label } from "@/components/ui/label"
 import { toast } from "@/hooks/use-toast"
 
 interface Job {
@@ -39,6 +41,7 @@ interface Applicant {
   resumeUrl?: string
   email?: string
   jobId?: number
+  feedback?: string
 }
 
 export default function RecruiterDashboard() {
@@ -53,6 +56,12 @@ export default function RecruiterDashboard() {
   const [jobToDelete, setJobToDelete] = useState<number | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [filteredApplicants, setFilteredApplicants] = useState<Applicant[]>([])
+  
+  // New state for feedback dialog
+  const [isFeedbackDialogOpen, setIsFeedbackDialogOpen] = useState(false)
+  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null)
+  const [feedbackAction, setFeedbackAction] = useState<"Accepted" | "Rejected" | null>(null)
+  const [feedbackMessage, setFeedbackMessage] = useState("")
 
   // Load jobs and applications from localStorage
   useEffect(() => {
@@ -69,6 +78,7 @@ export default function RecruiterDashboard() {
       resumeUrl: app.resumeUrl,
       email: app.email,
       jobId: app.jobId,
+      feedback: app.feedback || "",
     }))
 
     setApplicants(applicantsData)
@@ -119,26 +129,53 @@ export default function RecruiterDashboard() {
     })
   }
 
-  const updateApplicationStatus = (applicantId: number, newStatus: string) => {
+  // Open feedback dialog when accepting or rejecting
+  const openFeedbackDialog = (applicant: Applicant, action: "Accepted" | "Rejected") => {
+    setSelectedApplicant(applicant)
+    setFeedbackAction(action)
+    setFeedbackMessage("")
+    setIsFeedbackDialogOpen(true)
+  }
+
+  // Submit feedback and update application status
+  const submitFeedback = () => {
+    if (!selectedApplicant || !feedbackAction) return
+
+    // Update applicants state with new status and feedback
     const updatedApplicants = applicants.map((applicant) =>
-      applicant.id === applicantId ? { ...applicant, status: newStatus } : applicant,
+      applicant.id === selectedApplicant.id 
+        ? { ...applicant, status: feedbackAction, feedback: feedbackMessage } 
+        : applicant
     )
+    
     setApplicants(updatedApplicants)
     setFilteredApplicants(
       filteredApplicants.map((applicant) =>
-        applicant.id === applicantId ? { ...applicant, status: newStatus } : applicant,
-      ),
+        applicant.id === selectedApplicant.id 
+          ? { ...applicant, status: feedbackAction, feedback: feedbackMessage } 
+          : applicant
+      )
     )
 
+    // Update localStorage
     const applications = JSON.parse(localStorage.getItem("applications") || "[]")
     const updatedApplications = applications.map((app: any) =>
-      app.id === applicantId ? { ...app, status: newStatus } : app,
+      app.id === selectedApplicant.id 
+        ? { ...app, status: feedbackAction, feedback: feedbackMessage } 
+        : app
     )
+    
     localStorage.setItem("applications", JSON.stringify(updatedApplications))
 
+    // Close dialog and show toast
+    setIsFeedbackDialogOpen(false)
+    setSelectedApplicant(null)
+    setFeedbackAction(null)
+    setFeedbackMessage("")
+
     toast({
-      title: "Status updated",
-      description: `Application status has been updated to ${newStatus}.`,
+      title: `Application ${feedbackAction.toLowerCase()}`,
+      description: `You have ${feedbackAction.toLowerCase()} this application with feedback.`,
     })
   }
 
@@ -217,11 +254,6 @@ export default function RecruiterDashboard() {
           <Button className="flex items-center gap-2" asChild>
             <Link href="/recruiter/post-job">
               <Plus className="h-4 w-4" /> Post a New Job
-            </Link>
-          </Button>
-          <Button variant="outline" className="flex items-center gap-2" asChild>
-            <Link href="/recruiter/company-profile">
-              <FileText className="h-4 w-4" /> Edit Company Profile
             </Link>
           </Button>
           <Button variant="outline" className="flex items-center gap-2" asChild>
@@ -390,20 +422,24 @@ export default function RecruiterDashboard() {
                           </TableCell>
                           <TableCell className="text-right">
                             <div className="flex justify-end gap-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => updateApplicationStatus(applicant.id, "Accepted")}
-                              >
-                                Accept
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => updateApplicationStatus(applicant.id, "Rejected")}
-                              >
-                                Reject
-                              </Button>
+                              {applicant.status !== "Accepted" && applicant.status !== "Rejected" && (
+                                <>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => openFeedbackDialog(applicant, "Accepted")}
+                                  >
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => openFeedbackDialog(applicant, "Rejected")}
+                                  >
+                                    Reject
+                                  </Button>
+                                </>
+                              )}
                               {applicant.resumeUrl && (
                                 <Button variant="ghost" size="icon" asChild>
                                   <a
@@ -458,6 +494,50 @@ export default function RecruiterDashboard() {
             </Button>
             <Button variant="destructive" onClick={deleteJob}>
               Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Feedback Dialog */}
+      <Dialog open={isFeedbackDialogOpen} onOpenChange={setIsFeedbackDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {feedbackAction === "Accepted" ? "Accept Application" : "Reject Application"}
+            </DialogTitle>
+            <DialogDescription>
+              {feedbackAction === "Accepted" 
+                ? "Provide feedback on why you're accepting this candidate." 
+                : "Provide feedback on why you're rejecting this application."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="feedback">Feedback Message</Label>
+              <Textarea
+                id="feedback"
+                placeholder={
+                  feedbackAction === "Accepted"
+                    ? "E.g., Your qualifications and experience make you a great fit for our team..."
+                    : "E.g., We've decided to move forward with candidates who have more experience in..."
+                }
+                value={feedbackMessage}
+                onChange={(e) => setFeedbackMessage(e.target.value)}
+                className="min-h-32"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsFeedbackDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant={feedbackAction === "Accepted" ? "default" : "destructive"}
+              onClick={submitFeedback}
+              disabled={!feedbackMessage.trim()}
+            >
+              Submit Feedback
             </Button>
           </DialogFooter>
         </DialogContent>

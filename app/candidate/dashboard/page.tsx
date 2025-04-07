@@ -7,9 +7,17 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { Briefcase, Building2, Clock, FileText, Heart, MapPin, Plus, Search, Trash2 } from "lucide-react"
+import { AlertCircle, Briefcase, Building2, Clock, FileText, Heart, Info, MapPin, MessageCircle, Plus, Search, Trash2 } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { toast } from "@/hooks/use-toast"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog"
 
 interface SavedJob {
   id: number
@@ -29,6 +37,7 @@ interface Application {
   appliedDate: string
   status: string
   location?: string
+  feedback?: string // Add feedback field
 }
 
 export default function CandidateDashboard() {
@@ -40,6 +49,10 @@ export default function CandidateDashboard() {
   const [savedJobs, setSavedJobs] = useState<SavedJob[]>([])
   const [applications, setApplications] = useState<Application[]>([])
   const [profileCompletion, setProfileCompletion] = useState(65)
+  
+  // State for feedback dialog
+  const [isFeedbackDialogOpen, setIsFeedbackDialogOpen] = useState(false)
+  const [currentApplication, setCurrentApplication] = useState<Application | null>(null)
 
   // Load saved jobs and applications from localStorage
   useEffect(() => {
@@ -83,6 +96,28 @@ export default function CandidateDashboard() {
     })
   }
 
+  // Show feedback dialog
+  const viewFeedback = (application: Application) => {
+    setCurrentApplication(application)
+    setIsFeedbackDialogOpen(true)
+  }
+
+  // Get the appropriate badge variant based on status
+  const getStatusBadgeVariant = (status: string) => {
+    switch (status) {
+      case "Pending":
+        return "outline"
+      case "Interview":
+        return "default"
+      case "Accepted":
+        return "secondary"
+      case "Rejected":
+        return "destructive"
+      default:
+        return undefined
+    }
+  }
+
   // Mock recommended jobs
   const recommendedJobs = [
     {
@@ -113,8 +148,8 @@ export default function CandidateDashboard() {
 
 
         {/* Dashboard Tabs */}
-        <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full ">
+          <TabsList className="grid w-full grid-cols-2 mb-6">
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="saved">Saved Jobs</TabsTrigger>
           </TabsList>
@@ -149,19 +184,24 @@ export default function CandidateDashboard() {
                               {application.company}
                             </CardDescription>
                           </div>
-                          <Badge
-                            variant={
-                              application.status === "Pending"
-                                ? "outline"
-                                : application.status === "Interview"
-                                  ? "default"
-                                  : application.status === "Accepted"
-                                    ? "default"
-                                    : "destructive"
-                            }
-                          >
-                            {application.status}
-                          </Badge>
+                          <div className="flex items-center gap-2">
+                            <Badge
+                              variant={getStatusBadgeVariant(application.status)}
+                            >
+                              {application.status}
+                            </Badge>
+                            {(application.status === "Accepted" || application.status === "Rejected") && 
+                              application.feedback && (
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={() => viewFeedback(application)}
+                                title="View Feedback"
+                              >
+                                <MessageCircle className="h-4 w-4" />
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </CardHeader>
                       <CardContent className="pb-2">
@@ -358,6 +398,30 @@ export default function CandidateDashboard() {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Feedback Dialog */}
+      <Dialog open={isFeedbackDialogOpen} onOpenChange={setIsFeedbackDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              {currentApplication?.status === "Accepted" ? (
+                <>Application Accepted <Badge>Accepted</Badge></>
+              ) : (
+                <>Application Rejected <Badge variant="destructive">Rejected</Badge></>
+              )}
+            </DialogTitle>
+            <DialogDescription>
+              Feedback from {currentApplication?.company} regarding your application:
+            </DialogDescription>
+          </DialogHeader>
+          <div className="bg-muted/50 p-4 rounded-md mt-2">
+            <p className="whitespace-pre-wrap">{currentApplication?.feedback}</p>
+          </div>
+          <DialogFooter>
+            <Button onClick={() => setIsFeedbackDialogOpen(false)}>Close</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

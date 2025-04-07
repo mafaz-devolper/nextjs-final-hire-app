@@ -93,8 +93,8 @@ export default function SignupPage() {
         </CardHeader>
         <Tabs defaultValue={defaultTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="candidate" className="text-base py-2">Candidate</TabsTrigger>
-            <TabsTrigger value="recruiter" className="text-base py-2">Recruiter</TabsTrigger>
+            <TabsTrigger value="candidate" className="text-base py-2 data-[state=active]:bg-blue-800 data-[state=active]:text-white">Candidate</TabsTrigger>
+            <TabsTrigger value="recruiter" className="text-base py-2 data-[state=active]:bg-blue-800 data-[state=active]:text-white">Recruiter</TabsTrigger>
           </TabsList>
           <TabsContent value="candidate">
             <form onSubmit={(e) => handleSubmit(e, "candidate")}>

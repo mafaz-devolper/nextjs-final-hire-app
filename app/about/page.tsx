@@ -112,56 +112,6 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Our Team */}
-        <div className="space-y-12">
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl font-bold">Our Leadership Team</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto px-4">
-              Meet the passionate individuals driving JobPortal's mission forward.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-            {[
-              {
-                name: "Md Mafaz",
-                role: "CEO & Co-founder",
-                image: "https://media.licdn.com/dms/image/v2/D4D03AQH_7QeFT_u3fA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1731676450701?e=1747872000&v=beta&t=WhQwJ0YgIVvU3qCQx8lB7pOBdfmaHxRuQSKQMbIKvII",
-              },
-              {
-                name: "Md Shoheb",
-                role: "Co-founder",
-                image: "/shoheb.jpeg",
-              },
-              {
-                name: "Md Yusuf",
-                role: "CTO",
-                image: "/yusuf.png",
-              },
-              {
-                name: "Shahid Danked",
-                role: "Chief Marketing Officer",
-                image: "/shahid.png",
-              },
-            ].map((member) => (
-              <Card key={member.name} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-8 flex flex-col items-center text-center space-y-4">
-                  <div className="rounded-full overflow-hidden w-32 h-32 shadow-md">
-                    <img
-                      src={member.image || "/placeholder.svg"}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="font-bold text-xl">{member.name}</h3>
-                    <p className="text-muted-foreground">{member.role}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
         {/* CTA */}
         <div className="bg-primary/5 rounded-2xl p-8 md:p-12 text-center space-y-8">
           <h2 className="text-3xl md:text-4xl font-bold">Join Our Community</h2>
